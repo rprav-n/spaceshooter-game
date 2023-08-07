@@ -10,16 +10,21 @@ public class Player : Area2D
 	
 	private AnimatedSprite playerAnimatedSprite;
 	private AnimatedSprite boosterAnimatedSprite;
+	private PackedScene PlayerBeam;
+	private Node beamContainer;
 
 	public override void _Ready()
 	{
 		playerAnimatedSprite = GetNode<AnimatedSprite>("PlayerAnimatedSprite");
 		boosterAnimatedSprite = GetNode<AnimatedSprite>("BoosterAnimatedSprite");
+		PlayerBeam = GD.Load<PackedScene>("res://scenes/PlayerBeam.tscn");
+		beamContainer = GetNode<Node>("BeamContainer");
 	}
 
 	public override void _Process(float delta)
 	{
 		playerMovement(delta);
+		shootBeam();
 	}
 	
 	private void playerMovement(float delta) 
@@ -49,5 +54,18 @@ public class Player : Area2D
 		
 		GlobalPosition += newPosition;
 		
+	}
+	
+	private void shootBeam() 
+	{
+		if (Input.IsActionJustPressed("shoot")) 
+		{
+			GD.Print("Player shoot");
+			var playerBeam = PlayerBeam.Instance<Beam>();
+			beamContainer.AddChild(playerBeam);
+			var playerPosition = GlobalPosition;
+			playerPosition.y -= 10;
+			playerBeam.GlobalPosition = playerPosition;
+		}
 	}
 }

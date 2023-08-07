@@ -95,3 +95,5 @@ shape = SubResource( 5 )
 frames = SubResource( 8 )
 animation = "idle"
 offset = Vector2( 0, 15 )
+
+[node name="BeamContainer" type="Node" parent="."]

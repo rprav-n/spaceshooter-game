@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/World.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Space_BG (2 frames) (64 x 64).png" type="Texture" id=3]
+[ext_resource path="res://scenes/PlayerBeam.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,3 +16,6 @@ region_rect = Rect2( 0, 0, 150, 250 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 75, 220 )
+
+[node name="PlayerBeam" parent="." instance=ExtResource( 4 )]
+position = Vector2( 74, 194 )
