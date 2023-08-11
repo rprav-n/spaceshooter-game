@@ -24,10 +24,10 @@ position = Vector2( 75, 220 )
 position = Vector2( 74, 194 )
 
 [node name="AlanEnemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 71, 121 )
+position = Vector2( 32, 114 )
 
 [node name="BonEnemy" parent="." instance=ExtResource( 6 )]
-position = Vector2( 102, 120 )
+position = Vector2( 78, 114 )
 
 [node name="LipsEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 40, 121 )
+position = Vector2( 126, 116 )
