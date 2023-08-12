@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/World.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Space_BG (2 frames) (64 x 64).png" type="Texture" id=3]
-[ext_resource path="res://scenes/PlayerBeam.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/AlanEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/BonEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/LipsEnemy.tscn" type="PackedScene" id=7]
@@ -19,9 +18,6 @@ region_rect = Rect2( 0, 0, 150, 250 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 75, 220 )
-
-[node name="PlayerBeam" parent="." instance=ExtResource( 4 )]
-position = Vector2( 74, 194 )
 
 [node name="AlanEnemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 32, 114 )

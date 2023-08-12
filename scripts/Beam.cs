@@ -21,7 +21,6 @@ public class Beam : Area2D
 	
 	private void _on_BeamVisibilityNotifier2D_screen_exited() 
 	{
-		GD.Print("Bullet Free'd");
 		QueueFree();
 	}
 }
