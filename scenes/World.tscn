@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/World.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://scenes/AlanEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/BonEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/LipsEnemy.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 117, 10 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,10 +23,26 @@ region_rect = Rect2( 0, 0, 150, 250 )
 position = Vector2( 75, 220 )
 
 [node name="AlanEnemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 32, 114 )
+position = Vector2( 116, 81 )
+speed = 0
 
 [node name="BonEnemy" parent="." instance=ExtResource( 6 )]
-position = Vector2( 78, 114 )
+position = Vector2( 80, 80 )
+speed = 0
 
 [node name="LipsEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 126, 116 )
+position = Vector2( 40, 80 )
+speed = 0
+
+[node name="DeadZone" type="Area2D" parent="."]
+position = Vector2( 75, 280 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone"]
+shape = SubResource( 1 )
+
+[node name="ProjectileContainer" type="Node" parent="."]
+
+[connection signal="shootProjectile" from="AlanEnemy" to="." method="_on_Enemy_shootProjectile"]
+[connection signal="shootProjectile" from="BonEnemy" to="." method="_on_Enemy_shootProjectile"]
+[connection signal="shootProjectile" from="LipsEnemy" to="." method="_on_Enemy_shootProjectile"]
+[connection signal="area_entered" from="DeadZone" to="." method="_on_DeadZone_area_entered"]

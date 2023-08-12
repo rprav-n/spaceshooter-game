@@ -1,22 +1,26 @@
 using Godot;
 using System;
+using System.Runtime.InteropServices;
 
 public class Enemy : Area2D
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
+	[Export]
+	private int speed = 100;
 
-	// Called when the node enters the scene tree for the first time.
+	[Signal]
+	private delegate void shootProjectile(Vector2 location);
+
 	public override void _Ready()
 	{
-		
+
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
+		var newVelocity = Vector2.Zero;
+		newVelocity.y = speed * delta;
 		
+		GlobalPosition += newVelocity;
 	}
 	
 	private void _on_Enemy_area_entered(Area2D area) 
@@ -26,5 +30,10 @@ public class Enemy : Area2D
 			beam.QueueFree();
 			QueueFree();
 		}
+	}
+	
+	private void _on_ShootProjectileTimer_timeout() 
+	{
+		EmitSignal("shootProjectile", this, GlobalPosition);
 	}
 }

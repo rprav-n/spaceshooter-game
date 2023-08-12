@@ -9,4 +9,8 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
+[node name="ShootProjectileTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
+[connection signal="timeout" from="ShootProjectileTimer" to="." method="_on_ShootProjectileTimer_timeout"]
