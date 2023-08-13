@@ -97,3 +97,5 @@ animation = "idle"
 offset = Vector2( 0, 15 )
 
 [node name="BeamContainer" type="Node" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]

@@ -68,4 +68,16 @@ public class Player : Area2D
 			playerBeam.GlobalPosition = playerPosition;
 		}
 	}
+	
+	private void _on_Player_area_entered(Area2D area) 
+	{
+		if (area is Enemy enemy) 
+		{
+			enemy.QueueFree();
+		}
+		if (area is Projectile projectile) 
+		{
+			projectile.QueueFree();
+		}
+	}
 }
