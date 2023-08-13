@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using System.Drawing.Printing;
 
 public class Player : Area2D
 {
 	[Export]
 	private int speed = 100;
+	
+	[Signal]
+	private delegate void enemyDestroyed(Vector2 location);
 	
 	private Vector2 newPosition = Vector2.Zero;
 	
@@ -60,7 +64,6 @@ public class Player : Area2D
 	{
 		if (Input.IsActionJustPressed("shoot")) 
 		{
-			GD.Print("Player shoot");
 			var playerBeam = PlayerBeam.Instance<Beam>();
 			beamContainer.AddChild(playerBeam);
 			var playerPosition = GlobalPosition;
@@ -73,6 +76,7 @@ public class Player : Area2D
 	{
 		if (area is Enemy enemy) 
 		{
+			EmitSignal("enemyDestroyed", enemy.GlobalPosition);
 			enemy.QueueFree();
 		}
 		if (area is Projectile projectile) 

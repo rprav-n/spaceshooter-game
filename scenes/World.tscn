@@ -22,6 +22,7 @@ region_rect = Rect2( 0, 0, 150, 250 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 75, 220 )
+speed = 150
 
 [node name="DeadZone" type="Area2D" parent="."]
 position = Vector2( 75, 280 )
@@ -52,5 +53,8 @@ position = Vector2( 100, 0 )
 [node name="SpawnPosition5" type="Position2D" parent="SpawnPositionContainer"]
 position = Vector2( 130, 0 )
 
+[node name="Effects" type="Node2D" parent="."]
+
+[connection signal="enemyDestroyed" from="Player" to="." method="_on_Enemy_Died"]
 [connection signal="area_entered" from="DeadZone" to="." method="_on_DeadZone_area_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

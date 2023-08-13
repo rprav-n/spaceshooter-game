@@ -8,6 +8,9 @@ public class World : Node2D
 	[Export]
 	private List<PackedScene> enemies;
 	
+	private PackedScene EnemyExplosion;
+	private Node2D effects;
+	
 	private Node projectileContainer;
 	private PackedScene ProjectileScene;
 	private Node2D spawnPositionContainer;
@@ -26,6 +29,9 @@ public class World : Node2D
 		{
 			spawPositionArr.Add(item as Position2D);
 		}
+		
+		EnemyExplosion = GD.Load<PackedScene>("res://scenes/EnemyExplosion.tscn");
+		effects = GetNode<Node2D>("Effects");
 		
 	}
 
@@ -74,5 +80,17 @@ public class World : Node2D
 		
 		randomEnemy.GlobalPosition = randomPosition.GlobalPosition;
 		randomEnemy.Connect("shootProjectile", this, "_on_Enemy_shootProjectile");
+		randomEnemy.Connect("enemyDied", this, "_on_Enemy_Died");
 	}
+	
+	private void _on_Enemy_Died(Vector2 location) 
+	{
+		var enemyExplosion = EnemyExplosion.Instance<EnemyExplosion>();
+		effects.AddChild(enemyExplosion);
+		enemyExplosion.GlobalPosition = location;
+		
+		enemyExplosion.PlayAnimation();
+	}
+	
 }
+
