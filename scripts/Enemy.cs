@@ -34,6 +34,7 @@ public class Enemy : Area2D
 	
 	private void _on_ShootProjectileTimer_timeout() 
 	{
+		GD.Print("Shoot Projectile");
 		EmitSignal("shootProjectile", this, GlobalPosition);
 	}
 }

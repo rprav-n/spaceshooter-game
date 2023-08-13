@@ -12,6 +12,7 @@ extents = Vector2( 117, 10 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
+enemies = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -22,18 +23,6 @@ region_rect = Rect2( 0, 0, 150, 250 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 75, 220 )
 
-[node name="AlanEnemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 116, 81 )
-speed = 0
-
-[node name="BonEnemy" parent="." instance=ExtResource( 6 )]
-position = Vector2( 80, 80 )
-speed = 0
-
-[node name="LipsEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 40, 80 )
-speed = 0
-
 [node name="DeadZone" type="Area2D" parent="."]
 position = Vector2( 75, 280 )
 
@@ -42,7 +31,26 @@ shape = SubResource( 1 )
 
 [node name="ProjectileContainer" type="Node" parent="."]
 
-[connection signal="shootProjectile" from="AlanEnemy" to="." method="_on_Enemy_shootProjectile"]
-[connection signal="shootProjectile" from="BonEnemy" to="." method="_on_Enemy_shootProjectile"]
-[connection signal="shootProjectile" from="LipsEnemy" to="." method="_on_Enemy_shootProjectile"]
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SpawnPositionContainer" type="Node2D" parent="."]
+position = Vector2( 0, -32 )
+
+[node name="SpawnPosition1" type="Position2D" parent="SpawnPositionContainer"]
+position = Vector2( 20, 0 )
+
+[node name="SpawnPosition2" type="Position2D" parent="SpawnPositionContainer"]
+position = Vector2( 45, 0 )
+
+[node name="SpawnPosition3" type="Position2D" parent="SpawnPositionContainer"]
+position = Vector2( 75, 0 )
+
+[node name="SpawnPosition4" type="Position2D" parent="SpawnPositionContainer"]
+position = Vector2( 100, 0 )
+
+[node name="SpawnPosition5" type="Position2D" parent="SpawnPositionContainer"]
+position = Vector2( 130, 0 )
+
 [connection signal="area_entered" from="DeadZone" to="." method="_on_DeadZone_area_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

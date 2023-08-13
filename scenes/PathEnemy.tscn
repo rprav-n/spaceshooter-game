@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/AlanEnemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/PathEnemy.cs" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -25, -18, 0, -47.031, 0, 47.031, 146, 39, 0, -46.2201, 0, 46.2201, 8, 95, -0.810879, -44.5983, 0.810879, 44.5983, 141, 153, 0.810879, -37.3004, -0.810879, 37.3004, 8, 208, 0, 0, 0, 0, 172, 265 )
+}
+
+[node name="PathEnemy" type="Path2D"]
+curve = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2( -25, -18 )
+rotation = 0.176637
+rotate = false
+loop = false
+
+[node name="AlanEnemy" parent="PathFollow2D" instance=ExtResource( 1 )]
+rotation = -0.174533
+speed = 0
