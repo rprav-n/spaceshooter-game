@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/World.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Space_BG (2 frames) (64 x 64).png" type="Texture" id=3]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/AlanEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/BonEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/LipsEnemy.tscn" type="PackedScene" id=7]
@@ -13,6 +14,10 @@ extents = Vector2( 117, 10 )
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 enemies = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
