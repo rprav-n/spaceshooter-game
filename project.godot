@@ -12,7 +12,8 @@ config_version=4
 
 config/name="Space Shooter"
 run/main_scene="res://scenes/MainMenu.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
+config/macos_native_icon="res://assets/icon2.ico"
 
 [display]
 
