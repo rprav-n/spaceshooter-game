@@ -16,10 +16,13 @@ Shoot: Space Key
 
 ## Screenshots
 
-<img src="./screenshots/sc1.png" width=200/>
-<img src="./screenshots/sc3.png" width=200/>
-<img src="./screenshots/sc4.png" width=200/>
-<img src="./screenshots/sc2.png" width=200/>
+<div style="display:flex; flex-wrap:wrap">
+    <img src="./screenshots/sc1.png" style="margin:1rem" width=200/>
+    <img src="./screenshots/sc3.png" style="margin:1rem" width=200/>
+    <img src="./screenshots/sc4.png" style="margin:1rem" width=200/>
+    <img src="./screenshots/sc2.png" style="margin:1rem" width=200/>
+</div>
+
 
 
 ## Gameplay
