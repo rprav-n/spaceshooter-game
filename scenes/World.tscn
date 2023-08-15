@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/World.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/GameOver.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Audio/sfx_laser1.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/Audio/explode.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/Audio/Brave Pilots (Menu Screen).ogg" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 117, 10 )
@@ -72,6 +73,11 @@ volume_db = -12.0
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -5.0
+autoplay = true
 
 [connection signal="enemyDestroyed" from="Player" to="." method="_on_Enemy_Died"]
 [connection signal="enemyProjectileHitsPlayer" from="Player" to="." method="_on_Player_enemyProjectileHitsPlayer"]
