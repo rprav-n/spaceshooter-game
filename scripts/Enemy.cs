@@ -11,7 +11,7 @@ public class Enemy : Area2D
 	private delegate void shootProjectile(Vector2 location);
 	
 	[Signal]
-	private delegate void enemyDied(Vector2 location);
+	private delegate void enemyDied(Vector2 location, bool hitsPlayer);
 
 	public override void _Ready()
 	{
@@ -30,7 +30,7 @@ public class Enemy : Area2D
 	{
 		if (area is Beam beam) 
 		{
-			EmitSignal("enemyDied", GlobalPosition);
+			EmitSignal("enemyDied", GlobalPosition, false);
 			
 			beam.QueueFree();
 			QueueFree();

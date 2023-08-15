@@ -10,12 +10,20 @@ public class World : Node2D
 	
 	private PackedScene EnemyExplosion;
 	private Node2D effects;
+	private Timer spawnTimer;
+	private Control gameOver;
 	
 	private Node projectileContainer;
 	private PackedScene ProjectileScene;
 	private Node2D spawnPositionContainer;
 	Random random = new Random();
 	private List<Position2D> spawPositionArr = new List<Position2D>();
+	
+	private HUD hud;
+	private AudioStreamPlayer explosionSound;
+	
+	private int lives = 3;
+	private int score = 0;
 	
 	public override void _Ready()
 	{
@@ -33,11 +41,22 @@ public class World : Node2D
 		EnemyExplosion = GD.Load<PackedScene>("res://scenes/EnemyExplosion.tscn");
 		effects = GetNode<Node2D>("Effects");
 		
-	}
+		hud = GetNode<HUD>("CanvasLayer/HUD");
+		spawnTimer = GetNode<Timer>("SpawnTimer");
+		gameOver = GetNode<Control>("CanvasLayer/GameOver");
 
-	public override void _Process(float delta)
-	{
+		explosionSound = GetNode<AudioStreamPlayer>("ExplosionSound");
 		
+		setDefaults();	
+	}
+	
+	private void setDefaults() 
+	{
+		lives = 3;
+		score = 0;
+		hud.SetLives(lives);
+		hud.UpdateScore(score);
+		gameOver.Visible = false;
 	}
 	
 	private void _on_DeadZone_area_entered(Area2D area) 
@@ -83,13 +102,51 @@ public class World : Node2D
 		randomEnemy.Connect("enemyDied", this, "_on_Enemy_Died");
 	}
 	
-	private void _on_Enemy_Died(Vector2 location) 
+	private void _on_Enemy_Died(Vector2 location, bool hitsPlayer) 
 	{
+		if (hitsPlayer) 
+		{
+			hud.ReduceLives();
+		}
+		spawnExplosion(location);
+		updateScore();
+	}
+	
+	private void spawnExplosion(Vector2 location) 
+	{
+		explosionSound.Play();
 		var enemyExplosion = EnemyExplosion.Instance<EnemyExplosion>();
 		effects.AddChild(enemyExplosion);
 		enemyExplosion.GlobalPosition = location;
 		
 		enemyExplosion.PlayAnimation();
+	}
+	
+	private void updateScore() 
+	{
+		score++;
+		hud.UpdateScore(score);
+	}
+	
+	private void updateLives() 
+	{
+		lives--;
+
+		if (lives <= 0) 
+		{
+			// TODO Game over screen
+			spawnTimer.Stop();
+			gameOver.Visible = true;
+		}
+		hud.ReduceLives();
+		
+	}
+	
+	private void _on_Player_enemyProjectileHitsPlayer(Vector2 location) 
+	{
+		updateLives();
+		spawnExplosion(location);
+		updateScore();
 	}
 	
 }

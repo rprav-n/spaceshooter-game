@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/World.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://scenes/AlanEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/BonEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/LipsEnemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/GameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/Audio/sfx_laser1.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/Audio/explode.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 117, 10 )
@@ -19,6 +22,9 @@ enemies = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
 
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource( 8 )]
+visible = false
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 centered = false
@@ -27,7 +33,7 @@ region_rect = Rect2( 0, 0, 150, 250 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 75, 220 )
-speed = 150
+speed = 180
 
 [node name="DeadZone" type="Area2D" parent="."]
 position = Vector2( 75, 280 )
@@ -60,6 +66,14 @@ position = Vector2( 130, 0 )
 
 [node name="Effects" type="Node2D" parent="."]
 
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -12.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
 [connection signal="enemyDestroyed" from="Player" to="." method="_on_Enemy_Died"]
+[connection signal="enemyProjectileHitsPlayer" from="Player" to="." method="_on_Player_enemyProjectileHitsPlayer"]
 [connection signal="area_entered" from="DeadZone" to="." method="_on_DeadZone_area_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
