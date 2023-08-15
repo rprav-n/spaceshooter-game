@@ -38,6 +38,7 @@ public class Player : Area2D
 	
 	private void playerMovement(float delta) 
 	{
+		var screenSize = GetViewportRect().Size;
 		float xDirection = Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left");
 		float yDirection = Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up");
 		
@@ -61,7 +62,18 @@ public class Player : Area2D
 		
 		newPosition = new Vector2(xDirection * speed * delta, yDirection * speed * delta).Normalized();
 		
+		GD.Print("newPosition", newPosition);
+		
 		GlobalPosition += newPosition;
+		
+		var newGlobalPosition = GlobalPosition;
+		
+		newGlobalPosition.x =  Mathf.Clamp(newGlobalPosition.x, 0, screenSize.x);
+		newGlobalPosition.y =  Mathf.Clamp(newGlobalPosition.y, 0, screenSize.y);
+		
+		GlobalPosition = newGlobalPosition;
+		
+
 		
 	}
 	

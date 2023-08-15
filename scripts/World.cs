@@ -21,6 +21,7 @@ public class World : Node2D
 	
 	private HUD hud;
 	private AudioStreamPlayer explosionSound;
+	private Area2D player;
 	
 	private int lives = 3;
 	private int score = 0;
@@ -46,6 +47,7 @@ public class World : Node2D
 		gameOver = GetNode<Control>("CanvasLayer/GameOver");
 
 		explosionSound = GetNode<AudioStreamPlayer>("ExplosionSound");
+		player = GetNode<Area2D>("Player");
 		
 		setDefaults();	
 	}
@@ -134,9 +136,10 @@ public class World : Node2D
 
 		if (lives <= 0) 
 		{
-			// TODO Game over screen
 			spawnTimer.Stop();
 			gameOver.Visible = true;
+			player.QueueFree();
+
 		}
 		hud.ReduceLives();
 		
